@@ -30,7 +30,7 @@ resource "aws_launch_configuration" "kafka_lc" {
   instance_type = "${var.instance_type}"
   #key_name      = "${aws_key_pair.deployer.key_name}"
   #security_groups = ["${aws_security_group.ssh.id}", "${aws_security_group.kafka.id}"]
-  #user_data     = "${data.template_file.user_data_kafka.rendered}"
+  user_data     = "${data.template_file.user_data_kafka.rendered}"
   associate_public_ip_address = true
   iam_instance_profile = "${aws_iam_instance_profile.kafka_profile.id}"
 }
