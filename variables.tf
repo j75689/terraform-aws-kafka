@@ -1,14 +1,13 @@
+variable "ssh_key_name" {
+  default = "kafka-cluster"
+}
 
 variable "project" {
   default = "kafka-aws"
 }
 
 variable "region" {
-  default = "us-west-2"
-}
-
-variable "amis_id" {
-  default = "ami-04b762b4289fba92b"
+  default = "ap-southeast-1"
 }
 
 variable "amis" {
@@ -25,23 +24,40 @@ variable "zookeeper_version" {
   default     = "3.5.5"
 }
 
+variable "kafka_scala_version" {
+  description = "The kafka scala version"
+  default     = "2.12"
+}
+
+
 variable "kafka_version" {
   description = "The kafka version"
-  default     = ""
+  default     = "2.3.0"
+}
+
+variable "kafka_log_retention" {
+  description = "retention period (hours)"
+  default = 168
+}
+
+variable "kafka_num_partitions" {
+  description = "number of partitions per topic"
+  default = 3
+}
+
+variable "kafka_replication_factor" {
+  description = "number of replication"
+  default = 2
 }
 
 variable "instance_type" {
   default = "t2.small"
 }
 
-variable "cluster_size_max" {
+variable "cluster_size" {
   default = "3"
 }
 
-variable "cluster_size_min" {
-  default = "3"
-}
-
-variable "availability_zones" {
-  default = ["us-west-2a", "us-west-2b", "us-west-2c"]
+variable "ebs_mount_point" {
+  default = "/tmp"
 }
