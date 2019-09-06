@@ -61,3 +61,16 @@ variable "cluster_size" {
 variable "ebs_mount_point" {
   default = "/tmp"
 }
+
+variable "subnet_id" {
+  default = ""
+}
+
+variable "vpc_id" {
+  default = ""
+}
+
+variable "kafka_inbound_block" {
+  type    = list(string)
+  default = ["0.0.0.0/0"]
+}

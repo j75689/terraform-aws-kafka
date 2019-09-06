@@ -11,3 +11,11 @@ data "template_file" "setup-kafka" {
     zookeeper_connect="${join(",", formatlist("%s:2181", aws_instance.kafka.*.private_ip))}"
   }
 }
+
+data "template_file" "setup-zookeeper" {
+  template = "${file("${path.module}/scripts/setup-zookeeper.sh")}"
+  vars = {
+    version="${var.zookeeper_version}"
+    ip_addrs="${join(",", aws_instance.kafka.*.private_ip)}"
+  }
+}

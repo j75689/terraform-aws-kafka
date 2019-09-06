@@ -29,8 +29,8 @@ resource "aws_instance" "kafka" {
   count = "${var.cluster_size}"
   ami = "${lookup(var.amis, var.region)}"
   instance_type = "${var.instance_type}"
-  #vpc_security_group_ids = ["${var.security_group_ids}"]
-  #subnet_id = "${var.static_subnet_ids[count.index]}"
+  vpc_security_group_ids = ["${aws_security_group.kafka.id}"]
+  subnet_id = "${var.subnet_id}"
   iam_instance_profile = "${aws_iam_instance_profile.kafka_profile.id}"
   key_name = "${var.ssh_key_name}"
   tags = {
