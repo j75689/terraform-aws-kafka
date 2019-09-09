@@ -28,25 +28,29 @@ resource "null_resource" "nodes" {
 
   provisioner "remote-exec" {
     inline = [
-      // install java
-      "sudo yum remove -y java-*",
-      "sudo yum install -y java-1.8.0",
-      // setup zookeeper
-      "chmod +x /tmp/setup-zookeeper.sh",
-      "sudo /tmp/setup-zookeeper.sh ${count.index}",
-      "sudo mv /tmp/zookeeper-ctl /etc/init.d/zookeeper",
-      "sudo chmod a+x /etc/init.d/zookeeper",
-      "sudo chown root:root /etc/init.d/zookeeper",
-      "sudo chkconfig zookeeper on",
-      "sudo service zookeeper start",
-      // setup broker
-      "chmod +x /tmp/setup-kafka.sh",
-      "sudo /tmp/setup-kafka.sh ${count.index} ${count.index}",
-      "sudo mv /tmp/kafka-ctl /etc/init.d/kafka",
-      "sudo chmod a+x /etc/init.d/kafka",
-      "sudo chown root:root /etc/init.d/kafka",
-      "sudo chkconfig kafka on",
-      "sudo service kafka start"
+        // mount ebs
+        "sudo mkfs -t xfs /dev/xvdf",
+        "sudo mkdir -p /kafkadata",
+        "sudo mount /dev/xvdf /kafkadata",
+        // install java
+        "sudo yum remove -y java-*",
+        "sudo yum install -y java-1.8.0",
+        // setup zookeeper
+        "chmod +x /tmp/setup-zookeeper.sh",
+        "sudo /tmp/setup-zookeeper.sh ${count.index}",
+        "sudo mv /tmp/zookeeper-ctl /etc/init.d/zookeeper",
+        "sudo chmod a+x /etc/init.d/zookeeper",
+        "sudo chown root:root /etc/init.d/zookeeper",
+        "sudo chkconfig zookeeper on",
+        "sudo service zookeeper start",
+        // setup broker
+        "chmod +x /tmp/setup-kafka.sh",
+        "sudo /tmp/setup-kafka.sh ${count.index} ${count.index}",
+        "sudo mv /tmp/kafka-ctl /etc/init.d/kafka",
+        "sudo chmod a+x /etc/init.d/kafka",
+        "sudo chown root:root /etc/init.d/kafka",
+        "sudo chkconfig kafka on",
+        "sudo service kafka start"
     ]
   }
 }

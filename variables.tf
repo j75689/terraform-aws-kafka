@@ -66,8 +66,13 @@ variable "cluster_size" {
   default = "3"
 }
 
+variable "ec2_ebs_volume_size" {
+  description = "GB"
+  default = 10
+}
+
 variable "ebs_mount_point" {
-  default = "/tmp"
+  default = "/dev/sdf"
 }
 
 variable "subnet_id" {

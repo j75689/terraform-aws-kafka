@@ -22,7 +22,7 @@ cd $base_name
 # configure the server
 cat config/server.properties \
     | sed "s|broker.id=0|broker.id=$broker_id|" \
-    | sed 's|log.dirs=/tmp/kafka-logs|log.dirs=${mount_point}/kafka-logs|' \
+    | sed 's|log.dirs=/tmp/kafka-logs|log.dirs=/kafkadata/kafka-logs|' \
     | sed 's|num.partitions=1|num.partitions=${num_partitions}|' \
     | sed 's|log.retention.hours=168|log.retention.hours=${log_retention}|' \
     | sed 's|zookeeper.connect=localhost:2181|zookeeper.connect=${zookeeper_connect}|' \
