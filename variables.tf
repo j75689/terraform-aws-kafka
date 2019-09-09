@@ -76,11 +76,11 @@ variable "ebs_mount_point" {
 }
 
 variable "subnet_id" {
-  default = "subnet-3521d242"
+  default = ""
 }
 
 variable "vpc_id" {
-  default = "vpc-e4be4581"
+  default = ""
 }
 
 variable "kafka_inbound_block" {
