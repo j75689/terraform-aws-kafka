@@ -2,6 +2,14 @@ variable "ssh_key_name" {
   default = "kafka-cluster"
 }
 
+variable "ssh_username" {
+  default = "ec2-user"
+}
+
+variable "ssh_key_file" {
+  default = "./kafka-cluster.pem"
+}
+
 variable "project" {
   default = "kafka-aws"
 }
@@ -63,14 +71,24 @@ variable "ebs_mount_point" {
 }
 
 variable "subnet_id" {
-  default = ""
+  default = "subnet-3521d242"
 }
 
 variable "vpc_id" {
-  default = ""
+  default = "vpc-e4be4581"
 }
 
 variable "kafka_inbound_block" {
   type    = list(string)
   default = ["0.0.0.0/0"]
+}
+
+variable "ssh_inbound_block" {
+  type    = list(string)
+  default = ["0.0.0.0/0"]
+}
+
+variable "cluster_network_cidr" {
+  type    = list(string)
+  default = ["172.31.0.0/16"]
 }

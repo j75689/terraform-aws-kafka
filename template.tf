@@ -16,6 +16,21 @@ data "template_file" "setup-zookeeper" {
   template = "${file("${path.module}/scripts/setup-zookeeper.sh")}"
   vars = {
     version="${var.zookeeper_version}"
-    ip_addrs="${join(",", aws_instance.kafka.*.private_ip)}"
+    ip_addrs="${join(",", formatlist("%s", aws_instance.kafka.*.private_ip))}"
   }
+}
+
+data "template_file" "kafka-ctl" {
+    template = "${file("${path.module}/scripts/kafka")}"
+    vars = {
+        scala_version = "${var.kafka_scala_version}"
+        kafka_version = "${var.kafka_version}"
+    }
+}
+
+data "template_file" "zookeeper-ctl" {
+    template = "${file("${path.module}/scripts/zookeeper")}"
+    vars = {
+        version = "${var.zookeeper_version}"
+    }
 }

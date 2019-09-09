@@ -8,7 +8,7 @@ resource "aws_security_group" "kafka" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = "${var.kafka_inbound_block}"
+    cidr_blocks = "${var.ssh_inbound_block}"
   }
 
   ingress {
@@ -23,6 +23,14 @@ resource "aws_security_group" "kafka" {
     to_port     = 9092
     protocol    = "tcp"
     cidr_blocks = "${var.kafka_inbound_block}"
+  }
+
+  ingress {
+    from_port   = 0
+    to_port     = 65535
+    protocol    = "tcp"
+    description = "private network"
+    cidr_blocks = "${var.cluster_network_cidr}"
   }
 
   egress {

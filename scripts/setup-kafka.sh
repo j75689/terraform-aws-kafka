@@ -3,10 +3,6 @@
 broker_id=$1
 az=$2
 
-# update java
-sudo yum remove -y java-*
-sudo yum install -y java-1.8.0
-
 # add directories that support kafka
 mkdir -p /opt/kafka
 mkdir -p /var/run/kafka

@@ -5,7 +5,8 @@ id=$1
 
 # create an array of IPs
 IFS=","
-ip_addrs=( ${ip_addrs} )
+ips=${ip_addrs}
+ip_addrs=($ips)
 
 # create zookeeper user
 mkdir -p /opt/zookeeper
@@ -34,8 +35,8 @@ cat conf/zoo_sample.cfg \
     > /tmp/zoo.cfg
 echo "# server list" >> /tmp/zoo.cfg
 
-for i in "${!ip_addrs[@]}";do
-    echo server.$i="${ip_addrs[$i]}:2888:3888" >> /tmp/zoo.cfg
+for i in "$${!ip_addrs[@]}";do
+    echo server.$i="$${ip_addrs[$i]}:2888:3888" >> /tmp/zoo.cfg
 done
 unset IFS
 mv /tmp/zoo.cfg conf/zoo.cfg
