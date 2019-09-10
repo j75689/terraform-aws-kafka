@@ -1,0 +1,12 @@
+[Unit]
+Description=Kafka Exporter
+
+[Service]
+Type=simple
+User=prometheus
+EnvironmentFile=/etc/sysconfig/kafka_exporter
+ExecStart=/apps/prometheus/bin/kafka_exporter $OPTIONS
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

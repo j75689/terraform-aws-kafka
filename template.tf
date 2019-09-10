@@ -28,6 +28,13 @@ data "template_file" "kafka-ctl" {
     }
 }
 
+data "template_file" "kafka-exporter-env" {
+    template = "${file("${path.module}/scripts/kafka_exporter.env")}"
+    vars = {
+        kafka_exporter_options = "${join(" ", formatlist("--kafka.server=%s:9092", aws_instance.kafka.*.private_ip))}"
+    }
+}
+
 data "template_file" "zookeeper-ctl" {
     template = "${file("${path.module}/scripts/zookeeper")}"
     vars = {

@@ -26,6 +26,16 @@ resource "null_resource" "nodes" {
     destination = "/tmp/kafka-ctl"
   }
 
+  provisioner "file" {
+    content = "${data.template_file.kafka-exporter-env.rendered}"
+    destination = "/tmp/kafka_exporter.env"
+  }
+
+  provisioner "file" {
+    source = "./scripts/kafka_exporter.service"
+    destination = "/tmp/kafka_exporter.service"
+  }
+
   provisioner "remote-exec" {
     inline = [
         // mount ebs
